@@ -261,3 +261,101 @@ pip install -r requirements.txt
 * Model deployment (Flask): ✔
 * Dependency management (`requirements.txt`): ✔
 * Containerization (Dockerfile): ✔
+
+
+
+## 🌥️ Cloud Deployment (Render)
+
+This project is deployed for FREE on **Render** as a public web service.
+
+### **🔗 Public URL (Predict Endpoint)**
+
+```
+https://heart-service-7kqp.onrender.com/predict
+```
+
+### **How It Works**
+
+Render assigns a dynamic port to your service.
+`service.py` is configured to read:
+
+```python
+port = int(os.environ.get("PORT", 9696))
+app.run(host="0.0.0.0", port=port)
+```
+
+This makes Flask work both locally (port 9696) and on Render (port assigned automatically).
+
+---
+
+## 🚀 Deployment Steps (Render)
+
+These were used to deploy the model:
+
+1. Pushed project to GitHub
+2. Created a **New Web Service** on Render
+3. Selected repo: `bhung-chung/mlzoomcamp-heart-risk`
+4. Set:
+
+| Setting       | Value                             |
+| ------------- | --------------------------------- |
+| Runtime       | Python                            |
+| Build Command | `pip install -r requirements.txt` |
+| Start Command | `python web/service.py`           |
+| Plan          | Free                              |
+
+5. Render automatically built and launched the service.
+
+---
+
+## 🧪 Testing the Deployed API
+
+Update `web/client.py`:
+
+```python
+url = "https://heart-service.onrender.com/predict"
+```
+
+Run:
+
+```bash
+python web/client.py
+```
+
+Example output:
+
+```json
+{
+  "heart_disease_probability": 0.354,
+  "heart_disease": false
+}
+```
+
+---
+
+## 📸 Deployment Proof (Screenshots)
+
+To satisfy ML Zoomcamp cloud scoring, include these screenshots:
+
+### ✔ **1. Render Dashboard — Service LIVE**
+<img width="1919" height="851" alt="image" src="https://github.com/user-attachments/assets/c5774d3a-2ab9-4ff9-9bed-8f974b7b4e8c" />
+
+Shows:
+
+* Green “Live” status
+* Service name
+* Public URL
+
+### ✔ **2. Terminal — Successful Prediction from Render**
+
+Output of:
+
+```bash
+python web/client.py
+```
+
+<img width="1320" height="94" alt="image" src="https://github.com/user-attachments/assets/aff17c69-4c18-47ae-9241-2dfc0ecd0835" />
+
+
+
+

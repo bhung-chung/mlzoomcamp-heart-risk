@@ -3,6 +3,7 @@ import pickle
 import numpy as np
 import pathlib as Path
 import pandas as pd
+import os
 
 #---------- Model Loading -----------------------
 BASE_DIR = Path.Path(__file__).resolve().parent.parent
@@ -45,5 +46,8 @@ def predict():
     return jsonify(result)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=9696)
+    
+    port = int(os.environ.get("PORT", 9696))
+    app.run(host="0.0.0.0", port=port)
+
 
